@@ -1,6 +1,8 @@
 """Central coordinator for federated drug-target graph retrieval."""
 
-import requests
+import asyncio
+
+import httpx
 import uvicorn
 from fastapi import FastAPI
 
@@ -13,17 +15,46 @@ CLIENT_URLS = [
 ]
 
 
+async def fetch_client_data(client, url, drug_id, timeout=2.0):
+    """Fetch targets from one lab client with a strict timeout."""
+    target_url = f"{url}/retrieve?drug_id={drug_id}"
+
+    try:
+        async with httpx.AsyncClient() as http_client:
+            response = await http_client.get(target_url, timeout=timeout)
+            response.raise_for_status()
+            return response.json()
+    except (httpx.TimeoutException, httpx.RequestError):
+        return {
+            "client_id": client,
+            "drug_id": drug_id,
+            "targets": [],
+            "status": "failed_or_timeout",
+        }
+
+
 @app.get("/global_retrieve")
-def global_retrieve(drug_id: str):
-    """Query all lab clients and aggregate their raw responses."""
-    raw_responses = []
+async def global_retrieve(drug_id: str):
+    """Query all lab clients in parallel and aggregate successful targets."""
+    tasks = [
+        fetch_client_data(f"Client_{index}", url, drug_id)
+        for index, url in enumerate(CLIENT_URLS, start=1)
+    ]
+    raw_responses = await asyncio.gather(*tasks)
 
-    for url in CLIENT_URLS:
-        target_url = f"{url}/retrieve?drug_id={drug_id}"
-        response = requests.get(target_url)
-        raw_responses.append(response.json())
+    all_targets = []
+    for response in raw_responses:
+        if response.get("status") == "success":
+            all_targets.extend(response.get("targets", []))
 
-    return {"query": drug_id, "raw_responses": raw_responses}
+    aggregated_targets = list(set(all_targets))
+
+    return {
+        "query": drug_id,
+        "aggregated_targets_count": len(aggregated_targets),
+        "aggregated_targets": aggregated_targets,
+        "raw_responses": raw_responses,
+    }
 
 
 if __name__ == "__main__":
