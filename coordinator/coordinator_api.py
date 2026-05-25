@@ -24,7 +24,7 @@ async def fetch_client_data(client, url, drug_id, timeout=2.0):
             response = await http_client.get(target_url, timeout=timeout)
             response.raise_for_status()
             return response.json()
-    except (httpx.TimeoutException, httpx.RequestError):
+    except (httpx.TimeoutException, httpx.RequestError, httpx.HTTPStatusError):
         return {
             "client_id": client,
             "drug_id": drug_id,
@@ -49,8 +49,20 @@ async def global_retrieve(drug_id: str):
 
     aggregated_targets = list(set(all_targets))
 
+    available_clients = []
+    missing_clients = []
+    for response in raw_responses:
+        status = response.get("status")
+        client_id = response.get("client_id")
+        if status in ("success", "not_found"):
+            available_clients.append(client_id)
+        elif status == "failed_or_timeout":
+            missing_clients.append(client_id)
+
     return {
         "query": drug_id,
+        "available_clients": available_clients,
+        "missing_clients": missing_clients,
         "aggregated_targets_count": len(aggregated_targets),
         "aggregated_targets": aggregated_targets,
         "raw_responses": raw_responses,
