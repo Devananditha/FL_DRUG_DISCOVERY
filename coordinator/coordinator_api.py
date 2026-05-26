@@ -69,8 +69,18 @@ async def global_retrieve(drug_id: str):
     for response in raw_responses:
         update_id = response.get("update_id")
         client_id = response.get("client_id", "unknown")
+        status = response.get("status", "unknown")
 
         if not update_id:
+            timeout_update_id = f"{query_id}_{client_id}_{status}"
+            await asyncio.to_thread(
+                log_to_ledger,
+                query_id,
+                client_id,
+                timeout_update_id,
+                status,
+                LEDGER_DB_PATH,
+            )
             continue
 
         is_duplicate = await asyncio.to_thread(

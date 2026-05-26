@@ -22,6 +22,7 @@ def check_if_duplicate(update_id: str, db_path: str = "ledger.db") -> bool:
             SELECT update_id
             FROM checkpoint_ledger
             WHERE update_id = ?
+              AND status = 'update_committed'
             """,
             (update_id,),
         )
@@ -39,29 +40,26 @@ def log_to_ledger(
 ) -> None:
     resolved_path = _resolve_db_path(db_path)
     timestamp = datetime.now().isoformat()
+    ledger_update_id = update_id
+
+    if status == "duplicate_ignored":
+        # Keep the original committed update immutable and append a separate audit event.
+        ledger_update_id = f"{update_id}::duplicate_ignored::{query_id}"
 
     with sqlite3.connect(resolved_path, timeout=30.0) as conn:
-        if status == "duplicate_ignored":
+        try:
             conn.execute(
                 """
-                UPDATE checkpoint_ledger
-                SET query_id = ?, client_id = ?, status = ?, timestamp = ?
-                WHERE update_id = ?
+                INSERT INTO checkpoint_ledger (
+                    query_id,
+                    client_id,
+                    update_id,
+                    status,
+                    timestamp
+                )
+                VALUES (?, ?, ?, ?, ?)
                 """,
-                (query_id, client_id, status, timestamp, update_id),
+                (query_id, client_id, ledger_update_id, status, timestamp),
             )
+        except sqlite3.IntegrityError:
             return
-
-        conn.execute(
-            """
-            INSERT INTO checkpoint_ledger (
-                query_id,
-                client_id,
-                update_id,
-                status,
-                timestamp
-            )
-            VALUES (?, ?, ?, ?, ?)
-            """,
-            (query_id, client_id, update_id, status, timestamp),
-        )
