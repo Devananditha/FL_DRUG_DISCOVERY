@@ -6,3 +6,5 @@ requests
 httpx
 aiohttp
 psutil
+matplotlib
+numpy
