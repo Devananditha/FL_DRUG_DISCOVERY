@@ -1,6 +1,7 @@
 """Central coordinator for federated drug-target graph retrieval."""
 
 import asyncio
+import logging
 import sys
 import uuid
 from pathlib import Path
@@ -11,11 +12,16 @@ from fastapi import FastAPI
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
-    sys.path.append(str(PROJECT_ROOT))
+    sys.path.insert(0, str(PROJECT_ROOT))
 
+from coordinator.coordinator_db import check_if_duplicate
 from ledger.ledger_manager import log_update
 
+logging.basicConfig(level=logging.INFO)
+
 app = FastAPI()
+
+LEDGER_DB_PATH = str(PROJECT_ROOT / "ledger" / "ledger.db")
 
 CLIENT_URLS = [
     "http://localhost:8001",
@@ -54,11 +60,24 @@ async def global_retrieve(drug_id: str):
     raw_responses = await asyncio.gather(*tasks)
 
     for response in raw_responses:
-        update_id = f"{query_id}_{response['client_id']}"
+        update_id = response.get("update_id")
+        client_id = response.get("client_id", "unknown")
+
+        if update_id:
+            is_duplicate = await asyncio.to_thread(
+                check_if_duplicate, update_id, LEDGER_DB_PATH
+            )
+            logging.info(
+                "Client %s Update %s duplicate status: %s",
+                client_id,
+                update_id,
+                is_duplicate,
+            )
+
         log_update(
-            update_id=update_id,
+            update_id=f"{query_id}_{client_id}",
             query_id=query_id,
-            client_id=response["client_id"],
+            client_id=client_id,
             status=response["status"],
         )
 

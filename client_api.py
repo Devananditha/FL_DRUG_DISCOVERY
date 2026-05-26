@@ -1,6 +1,7 @@
 """Reusable FastAPI client for local drug-target graph retrieval."""
 
 import argparse
+import uuid
 
 import networkx as nx
 import uvicorn
@@ -19,20 +20,24 @@ def retrieve(drug_id: str):
         raise HTTPException(status_code=503, detail="Client graph is not loaded")
 
     if drug_id not in G:
-        return {
+        payload = {
             "client_id": CLIENT_NAME,
             "drug_id": drug_id,
             "targets": [],
             "status": "not_found",
         }
+        payload["update_id"] = str(uuid.uuid4())
+        return payload
 
     targets = list(G.neighbors(drug_id))
-    return {
+    payload = {
         "client_id": CLIENT_NAME,
         "drug_id": drug_id,
         "targets": targets,
         "status": "success",
     }
+    payload["update_id"] = str(uuid.uuid4())
+    return payload
 
 
 if __name__ == "__main__":
