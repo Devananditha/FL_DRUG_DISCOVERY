@@ -2,6 +2,7 @@
 
 import argparse
 import asyncio
+import json
 import os
 import random
 import signal
@@ -14,6 +15,8 @@ import aiohttp
 import psutil
 
 PROJECT_ROOT = Path(__file__).resolve().parent
+METRICS_DIR = PROJECT_ROOT / "metrics"
+LOAD_TEST_METRICS_PATH = METRICS_DIR / "load_test_metrics.json"
 COORDINATOR_URL = "http://localhost:8000/global_retrieve"
 CLIENT_DOWNTIME_SECONDS = 2.5
 CLIENT_2_COMMAND = [
@@ -148,7 +151,7 @@ async def run_load_test(
     total_queries: int = 100,
     fault_rate: float = 0.30,
     downtime_seconds: float = CLIENT_DOWNTIME_SECONDS,
-) -> None:
+) -> dict[str, float | int]:
     """Run coordinator queries while randomly killing and restarting Client 2.
 
     Args:
@@ -157,7 +160,7 @@ async def run_load_test(
         downtime_seconds: Seconds to keep Client 2 offline during fault injection.
 
     Returns:
-        None
+        Summary metrics from the completed load test.
     """
     full_answers = 0
     degraded_answers = 0
@@ -219,6 +222,22 @@ async def run_load_test(
     print(f"Degraded Answers (<3/3): {degraded_answers}")
     print(f"Failed Coordinator Requests: {failed_queries}")
     print(f"Elapsed Time: {elapsed_seconds:.2f} seconds")
+
+    metrics = {
+        "total_queries": total_queries,
+        "full_answers": full_answers,
+        "degraded_answers": degraded_answers,
+        "failed_coordinator_requests": failed_queries,
+        "elapsed_seconds": round(elapsed_seconds, 2),
+        "fault_rate": fault_rate,
+        "downtime_seconds": downtime_seconds,
+    }
+
+    METRICS_DIR.mkdir(parents=True, exist_ok=True)
+    LOAD_TEST_METRICS_PATH.write_text(json.dumps(metrics, indent=2), encoding="utf-8")
+    print(f"Saved load-test metrics to {LOAD_TEST_METRICS_PATH}")
+
+    return metrics
 
 
 if __name__ == "__main__":

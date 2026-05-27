@@ -1,11 +1,14 @@
 """Collect exactly-once recovery metrics from the SQLite checkpoint ledger."""
 
+import json
 import sqlite3
 from pathlib import Path
 
 import pandas as pd
 
 DB_PATH = Path(__file__).resolve().parent / "ledger" / "ledger.db"
+METRICS_DIR = Path(__file__).resolve().parent / "metrics"
+LEDGER_METRICS_PATH = METRICS_DIR / "ledger_metrics.json"
 
 
 def load_ledger() -> pd.DataFrame:
@@ -31,7 +34,15 @@ def print_summary(metrics: dict[str, int]) -> None:
     print(f"Ignored Duplicates: {metrics['ignored_duplicates']}")
 
 
+def save_metrics(metrics: dict[str, int]) -> None:
+    """Save ledger metrics for chart generation."""
+    METRICS_DIR.mkdir(parents=True, exist_ok=True)
+    LEDGER_METRICS_PATH.write_text(json.dumps(metrics, indent=2), encoding="utf-8")
+    print(f"Saved ledger metrics to {LEDGER_METRICS_PATH}")
+
+
 if __name__ == "__main__":
     ledger = load_ledger()
     summary_metrics = calculate_metrics(ledger)
     print_summary(summary_metrics)
+    save_metrics(summary_metrics)

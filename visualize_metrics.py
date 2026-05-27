@@ -1,12 +1,42 @@
 """Generate presentation-ready evaluation charts for the federated system."""
 
+import json
+from pathlib import Path
+
 import matplotlib.pyplot as plt
 import numpy as np
 
-FULL_ANSWERS = 15
-DEGRADED_ANSWERS = 5
-UPDATE_COMMITTED = 428
-DUPLICATE_IGNORED = 2
+PROJECT_ROOT = Path(__file__).resolve().parent
+LOAD_TEST_METRICS_PATH = PROJECT_ROOT / "metrics" / "load_test_metrics.json"
+LEDGER_METRICS_PATH = PROJECT_ROOT / "metrics" / "ledger_metrics.json"
+
+DEFAULT_LOAD_TEST_METRICS = {
+    "full_answers": 12,
+    "degraded_answers": 8,
+}
+DEFAULT_LEDGER_METRICS = {
+    "committed_updates": 496,
+    "ignored_duplicates": 3,
+}
+
+
+def load_json_metrics(path: Path, defaults: dict[str, int]) -> dict[str, int]:
+    """Load metrics from JSON, or return defaults when no metrics file exists.
+
+    Args:
+        path: Metrics JSON file path.
+        defaults: Fallback values used before the first generated metrics file.
+
+    Returns:
+        Metrics dictionary for chart generation.
+    """
+    if not path.exists():
+        return defaults
+
+    with path.open("r", encoding="utf-8") as metrics_file:
+        loaded_metrics = json.load(metrics_file)
+
+    return {**defaults, **loaded_metrics}
 
 
 def create_reliability_chart() -> None:
@@ -17,8 +47,9 @@ def create_reliability_chart() -> None:
     Returns:
         None
     """
+    metrics = load_json_metrics(LOAD_TEST_METRICS_PATH, DEFAULT_LOAD_TEST_METRICS)
     labels = ["Full Answers (3/3)", "Degraded Answers (<3/3)"]
-    values = [FULL_ANSWERS, DEGRADED_ANSWERS]
+    values = [metrics["full_answers"], metrics["degraded_answers"]]
     colors = ["#2E7D32", "#F9A825"]
 
     plt.style.use("ggplot")
@@ -59,8 +90,9 @@ def create_recovery_chart() -> None:
     Returns:
         None
     """
+    metrics = load_json_metrics(LEDGER_METRICS_PATH, DEFAULT_LEDGER_METRICS)
     labels = ["Update Committed", "Duplicate Ignored"]
-    values = [UPDATE_COMMITTED, DUPLICATE_IGNORED]
+    values = [metrics["committed_updates"], metrics["ignored_duplicates"]]
     colors = ["#1565C0", "#C62828"]
     x_positions = np.arange(len(labels))
 
