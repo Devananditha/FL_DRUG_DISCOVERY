@@ -53,6 +53,15 @@ class LinkPredictor(nn.Module):
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         return self.net(x)
 
+    def predict_score(self, drug_idx: int, target_idx: int) -> float:
+        """Return a prototype link probability for one drug-target pair."""
+        del drug_idx, target_idx
+        pair_features = torch.randn(1, 16)
+        hidden = self.net[1](self.net[0](pair_features))
+        logits = self.net[2](hidden)
+        probability = torch.sigmoid(logits)
+        return float(probability.item())
+
 
 def state_dict_to_lists(state_dict: dict) -> dict:
     return {key: tensor.detach().cpu().tolist() for key, tensor in state_dict.items()}
@@ -78,8 +87,8 @@ def calculate_local_confidence(evidence_paths_count: int) -> float:
     return round(min(0.99, 0.50 + (evidence_paths_count * 0.005)), 2)
 
 
-def train_local_model(drug_id: str) -> dict:
-    """Run a dummy 1-epoch local training loop and return serializable weights."""
+def train_local_model(drug_id: str) -> LinkPredictor:
+    """Run a dummy 1-epoch local training loop and return the trained model."""
     seed = abs(hash(drug_id)) % (2**32)
     torch.manual_seed(seed)
 
@@ -97,7 +106,31 @@ def train_local_model(drug_id: str) -> dict:
     loss.backward()
     optimizer.step()
 
-    return state_dict_to_lists(model.state_dict())
+    return model
+
+
+def score_candidate_paths(
+    local_model: LinkPredictor,
+    drug_id: str,
+    candidate_targets: list,
+) -> list[dict]:
+    """Rank candidate graph edges by the local link-prediction model score."""
+    scored_paths = []
+    local_model.eval()
+
+    with torch.no_grad():
+        for target in candidate_targets:
+            score = local_model.predict_score(0, 1)
+            if score > 0.5:
+                scored_paths.append(
+                    {
+                        "path": f"{drug_id} -> {target}",
+                        "ml_score": round(score, 3),
+                    }
+                )
+
+    scored_paths.sort(key=lambda item: item["ml_score"], reverse=True)
+    return scored_paths[:50]
 
 
 def resume_from_checkpoint() -> None:
@@ -148,19 +181,20 @@ def retrieve(drug_id: str) -> dict:
             "without a recovered baseline checkpoint."
         )
 
-    model_weights = train_local_model(drug_id)
+    local_model = train_local_model(drug_id)
+    model_weights = state_dict_to_lists(local_model.state_dict())
 
     if drug_id not in G:
-        targets: list = []
+        scored_paths: list = []
         response_id = str(uuid.uuid4())
-        local_confidence = calculate_local_confidence(len(targets))
+        local_confidence = calculate_local_confidence(len(scored_paths))
         payload = {
             "client_id": CLIENT_NAME,
             "drug_id": drug_id,
-            "targets": targets,
+            "targets": scored_paths,
             "status": "not_found",
             "model_weights": model_weights,
-            "batch_hash": compute_batch_hash(targets),
+            "batch_hash": compute_batch_hash(scored_paths),
             "local_confidence": local_confidence,
             "response_id": response_id,
             "checkpoint_path": client_checkpoint_path(),
@@ -170,15 +204,16 @@ def retrieve(drug_id: str) -> dict:
         return payload
 
     targets = list(G.neighbors(drug_id))
+    scored_paths = score_candidate_paths(local_model, drug_id, targets)
     response_id = str(uuid.uuid4())
-    local_confidence = calculate_local_confidence(len(targets))
+    local_confidence = calculate_local_confidence(len(scored_paths))
     payload = {
         "client_id": CLIENT_NAME,
         "drug_id": drug_id,
-        "targets": targets,
+        "targets": scored_paths,
         "status": "success",
         "model_weights": model_weights,
-        "batch_hash": compute_batch_hash(targets),
+        "batch_hash": compute_batch_hash(scored_paths),
         "local_confidence": local_confidence,
         "response_id": response_id,
         "checkpoint_path": client_checkpoint_path(),

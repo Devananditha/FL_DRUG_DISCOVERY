@@ -314,9 +314,18 @@ async def global_retrieve(drug_id: str, mode: str = "aware") -> dict:
                 client_weights_list.append(model_weights)
 
             for target in targets:
-                evidence_paths.append(
-                    {"client_id": client_id, "path": f"{drug_id} -> {target}"}
-                )
+                if isinstance(target, dict):
+                    evidence_path = {
+                        "client_id": client_id,
+                        "path": target.get("path", f"{drug_id} -> unknown"),
+                    }
+                    if "ml_score" in target:
+                        evidence_path["ml_score"] = target["ml_score"]
+                    evidence_paths.append(evidence_path)
+                else:
+                    evidence_paths.append(
+                        {"client_id": client_id, "path": f"{drug_id} -> {target}"}
+                    )
 
     global_confidence = (
         round(sum(client_confidences) / len(client_confidences), 2)
