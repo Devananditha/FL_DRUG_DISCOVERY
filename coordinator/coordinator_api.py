@@ -1,6 +1,7 @@
 """Central coordinator for federated drug-target graph retrieval."""
 
 import asyncio
+import os
 import sys
 import time
 import uuid
@@ -191,6 +192,30 @@ def average_client_metrics(client_metrics: dict[str, dict]) -> dict:
         values = [metrics[metric_key] for metrics in client_metrics.values() if metric_key in metrics]
         averaged[metric_key] = round(sum(values) / len(values), 3) if values else 0.0
     return averaged
+
+
+def get_ledger_storage_metrics() -> dict:
+    """Return current SQLite ledger file size in bytes/KB plus display text."""
+    if not os.path.exists(LEDGER_DB_PATH):
+        return {
+            "ledger_size_bytes": 0,
+            "ledger_size_kb": 0.0,
+            "ledger_size_text": "0 KB",
+        }
+
+    size_bytes = os.path.getsize(LEDGER_DB_PATH)
+    size_kb = round(size_bytes / 1024, 2)
+    if size_kb > 1024:
+        size_mb = round(size_kb / 1024, 2)
+        size_text = f"{size_mb} MB"
+    else:
+        size_text = f"{size_kb} KB"
+
+    return {
+        "ledger_size_bytes": size_bytes,
+        "ledger_size_kb": size_kb,
+        "ledger_size_text": size_text,
+    }
 
 
 async def fetch_client_data(client: str, url: str, drug_id: str, timeout: float = CLIENT_RETRIEVE_TIMEOUT_SECONDS) -> dict:
@@ -402,6 +427,7 @@ async def global_retrieve(drug_id: str, mode: str = "aware") -> dict:
         if len(available_clients) == len(CLIENT_URLS)
         else "failure"
     )
+    storage_metrics = get_ledger_storage_metrics()
 
     return {
         "query": drug_id,
@@ -422,6 +448,7 @@ async def global_retrieve(drug_id: str, mode: str = "aware") -> dict:
         "performance_metrics": {
             "total_latency_ms": total_latency_ms,
             "system_state": system_state,
+            "ledger_size_kb": storage_metrics["ledger_size_kb"],
         },
         "raw_responses": sanitize_raw_responses_for_api(raw_responses),
     }
@@ -479,7 +506,12 @@ async def client_checkpoint(client_name: str) -> dict:
 @app.get("/audit", response_class=HTMLResponse)
 async def audit_dashboard() -> HTMLResponse:
     """Serve the read-only audit ledger dashboard."""
+    storage_metrics = get_ledger_storage_metrics()
     html_content = AUDIT_HTML_PATH.read_text(encoding="utf-8")
+    html_content = html_content.replace(
+        "__LEDGER_STORAGE_TEXT__",
+        storage_metrics["ledger_size_text"],
+    )
     return HTMLResponse(content=html_content)
 
 
