@@ -246,7 +246,9 @@ async def fetch_client_data(
         Parsed JSON response from the client, or a synthetic failure payload when
         the client is unreachable or exceeds the timeout.
     """
-    target_url = f"{url}/retrieve?drug_id={drug_id}&task_type={task_type}"
+    target_url = (
+        f"{url}/retrieve?drug_id={drug_id}&task_type={task_type}&include_weights=true"
+    )
     request_id = str(uuid.uuid4())
 
     try:

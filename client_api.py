@@ -110,6 +110,15 @@ def state_dict_to_lists(state_dict: dict) -> dict:
     return {key: tensor.detach().cpu().tolist() for key, tensor in state_dict.items()}
 
 
+def summarize_state_dict(state_dict: dict) -> dict:
+    """Return layer shapes only — safe for browser/curl demos."""
+    summary: dict = {}
+    for layer_name, tensor in state_dict.items():
+        shape = list(tensor.shape)
+        summary[layer_name] = {"shape": shape, "num_params": int(tensor.numel())}
+    return summary
+
+
 def client_checkpoint_path() -> str:
     """Return the canonical checkpoint archive path for this client node."""
     slug = CLIENT_NAME.strip().lower().replace(" ", "_")
@@ -359,8 +368,45 @@ def resume_from_checkpoint() -> None:
         )
 
 
+def _build_retrieve_payload(
+    *,
+    drug_id: str,
+    task_type: str,
+    status: str,
+    scored_paths: list,
+    metrics: dict,
+    state_dict: dict,
+    include_weights: bool,
+) -> dict:
+    """Assemble client JSON; omit full tensors unless the coordinator requested them."""
+    response_id = str(uuid.uuid4())
+    payload = {
+        "client_id": CLIENT_NAME,
+        "drug_id": drug_id,
+        "task_type": task_type,
+        "targets": scored_paths,
+        "status": status,
+        "batch_hash": compute_batch_hash(scored_paths),
+        "local_confidence": calculate_local_confidence(len(scored_paths)),
+        "metrics": metrics,
+        "response_id": response_id,
+        "checkpoint_path": client_checkpoint_path(),
+        "model_version": MODEL_VERSION,
+        "update_id": str(uuid.uuid4()),
+    }
+    if include_weights:
+        payload["model_weights"] = state_dict_to_lists(state_dict)
+    else:
+        payload["model_weights_summary"] = summarize_state_dict(state_dict)
+    return payload
+
+
 @app.get("/retrieve")
-def retrieve(drug_id: str, task_type: str = "classification") -> dict:
+def retrieve(
+    drug_id: str,
+    task_type: str = "classification",
+    include_weights: bool = False,
+) -> dict:
     """Return local graph neighbors for a queried drug ID."""
     if task_type not in ("classification", "regression"):
         raise HTTPException(
@@ -385,50 +431,31 @@ def retrieve(drug_id: str, task_type: str = "classification") -> dict:
         f"[Retrieve] {CLIENT_NAME} {task_type} training started for {drug_id}"
     )
     local_model, metrics = train_model(drug_id, task_type=task_type)
-    model_weights = state_dict_to_lists(local_model.state_dict())
+    state_dict = local_model.state_dict()
     print(f"[Retrieve] {CLIENT_NAME} training complete for {drug_id}")
 
     if drug_id not in G:
-        scored_paths: list = []
-        response_id = str(uuid.uuid4())
-        local_confidence = calculate_local_confidence(len(scored_paths))
-        payload = {
-            "client_id": CLIENT_NAME,
-            "drug_id": drug_id,
-            "task_type": task_type,
-            "targets": scored_paths,
-            "status": "not_found",
-            "model_weights": model_weights,
-            "batch_hash": compute_batch_hash(scored_paths),
-            "local_confidence": local_confidence,
-            "metrics": metrics,
-            "response_id": response_id,
-            "checkpoint_path": client_checkpoint_path(),
-            "model_version": MODEL_VERSION,
-        }
-        payload["update_id"] = str(uuid.uuid4())
-        return payload
+        return _build_retrieve_payload(
+            drug_id=drug_id,
+            task_type=task_type,
+            status="not_found",
+            scored_paths=[],
+            metrics=metrics,
+            state_dict=state_dict,
+            include_weights=include_weights,
+        )
 
     targets = list(G.neighbors(drug_id))
     scored_paths = score_candidate_paths(local_model, drug_id, targets)
-    response_id = str(uuid.uuid4())
-    local_confidence = calculate_local_confidence(len(scored_paths))
-    payload = {
-        "client_id": CLIENT_NAME,
-        "drug_id": drug_id,
-        "task_type": task_type,
-        "targets": scored_paths,
-        "status": "success",
-        "model_weights": model_weights,
-        "batch_hash": compute_batch_hash(scored_paths),
-        "local_confidence": local_confidence,
-        "metrics": metrics,
-        "response_id": response_id,
-        "checkpoint_path": client_checkpoint_path(),
-        "model_version": MODEL_VERSION,
-    }
-    payload["update_id"] = str(uuid.uuid4())
-    return payload
+    return _build_retrieve_payload(
+        drug_id=drug_id,
+        task_type=task_type,
+        status="success",
+        scored_paths=scored_paths,
+        metrics=metrics,
+        state_dict=state_dict,
+        include_weights=include_weights,
+    )
 
 
 if __name__ == "__main__":
