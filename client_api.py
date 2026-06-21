@@ -4,6 +4,7 @@ import argparse
 from contextlib import asynccontextmanager
 import hashlib
 import random
+import time
 import uuid
 
 import networkx as nx
@@ -165,7 +166,11 @@ def _empty_metrics(task_type: str) -> dict:
         "precision": 0.0,
         "recall": 0.0,
         "f1_score": 0.0,
+        "top_5_precision": 0.0,
+        "top_10_precision": 0.0,
+        "top_20_precision": 0.0,
         "top_50_precision": 0.0,
+        "mrr": 0.0,
     }
 
 
@@ -228,17 +233,27 @@ def _evaluate_model(
     f1 = f1_score(y_true, y_pred_binary, zero_division=0)
 
     ranked = sorted(zip(y_pred, y_true), key=lambda pair: pair[0], reverse=True)
-    top_k = ranked[: min(TOP_K, len(ranked))]
-    if top_k:
-        p_at_k = sum(label for _, label in top_k) / len(top_k)
-    else:
-        p_at_k = 0.0
+    
+    hit_at_k = {}
+    for k in [5, 10, 20, 50]:
+        top_k = ranked[: min(k, len(ranked))]
+        if top_k:
+            hit_at_k[f"top_{k}_precision"] = round(sum(label for _, label in top_k) / len(top_k), 3)
+        else:
+            hit_at_k[f"top_{k}_precision"] = 0.0
+
+    mrr = 0.0
+    for rank, (_, label) in enumerate(ranked, start=1):
+        if label == 1.0:
+            mrr = round(1.0 / rank, 3)
+            break
 
     return {
         "precision": round(float(precision), 3),
         "recall": round(float(recall), 3),
         "f1_score": round(float(f1), 3),
-        "top_50_precision": round(float(p_at_k), 3),
+        **hit_at_k,
+        "mrr": mrr,
     }
 
 
@@ -288,6 +303,7 @@ def train_model(drug_id: str, task_type: str = "classification") -> tuple[LinkPr
         f"train_edges={len(train_edges)} (pos={len(positive_train)}, neg={len(negative_train)})"
     )
 
+    t_start = time.perf_counter()
     model.train()
     for epoch in range(TRAINING_EPOCHS):
         optimizer.zero_grad()
@@ -300,7 +316,9 @@ def train_model(drug_id: str, task_type: str = "classification") -> tuple[LinkPr
             f"{loss_name} loss={loss.item():.4f}"
         )
 
+    t_end = time.perf_counter()
     metrics = _evaluate_model(model, holdout_positive, holdout_negative, task_type, rng)
+    metrics["training_time_ms"] = round((t_end - t_start) * 1000, 2)
     print(f"[ML Training] {CLIENT_NAME} holdout metrics: {metrics}")
     return model, metrics
 
@@ -411,6 +429,7 @@ def _build_retrieve_payload(
         "status": status,
         "batch_hash": compute_batch_hash(scored_paths),
         "local_confidence": calculate_local_confidence(len(scored_paths)),
+        "local_edge_count": len(G.edges()) if G else 0,
         "metrics": metrics,
         "response_id": response_id,
         "checkpoint_path": client_checkpoint_path(),
