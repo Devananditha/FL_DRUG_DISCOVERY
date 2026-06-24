@@ -305,12 +305,14 @@ def train_model(drug_id: str, task_type: str = "classification") -> tuple[LinkPr
 
     t_start = time.perf_counter()
     model.train()
+    loss_curve = []
     for epoch in range(TRAINING_EPOCHS):
         optimizer.zero_grad()
         logits = model(drug_tensor, target_tensor).squeeze(-1)
         loss = criterion(logits, label_tensor)
         loss.backward()
         optimizer.step()
+        loss_curve.append(round(loss.item(), 6))
         print(
             f"[ML Training] {CLIENT_NAME} epoch {epoch + 1}/{TRAINING_EPOCHS} "
             f"{loss_name} loss={loss.item():.4f}"
@@ -319,6 +321,8 @@ def train_model(drug_id: str, task_type: str = "classification") -> tuple[LinkPr
     t_end = time.perf_counter()
     metrics = _evaluate_model(model, holdout_positive, holdout_negative, task_type, rng)
     metrics["training_time_ms"] = round((t_end - t_start) * 1000, 2)
+    metrics["training_loss_curve"] = loss_curve
+    metrics["local_edge_count"] = len(all_edges)
     print(f"[ML Training] {CLIENT_NAME} holdout metrics: {metrics}")
     return model, metrics
 
