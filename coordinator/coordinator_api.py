@@ -354,6 +354,7 @@ async def global_retrieve(
     mode: str = "aware",
     task_type: str = "classification",
     fast: bool = False,
+    skip_ledger: bool = False,
 ) -> dict:
     """Query all lab clients in parallel and return a partial federated answer.
 
@@ -374,18 +375,19 @@ async def global_retrieve(
     query_id = str(uuid.uuid4())
     round_id = _next_round_id()
 
-    await _record_ledger_event(
-        query_id,
-        SYSTEM_CLIENT_ID,
-        f"{query_id}::{LEDGER_EVENT_QUERY_STARTED}",
-        LEDGER_EVENT_QUERY_STARTED,
-        round_id,
-        request_id=str(uuid.uuid4()),
-        response_id="",
-        checkpoint_path="",
-        model_version=DEFAULT_MODEL_VERSION,
-        evidence_hash="",
-    )
+    if not skip_ledger:
+        await _record_ledger_event(
+            query_id,
+            SYSTEM_CLIENT_ID,
+            f"{query_id}::{LEDGER_EVENT_QUERY_STARTED}",
+            LEDGER_EVENT_QUERY_STARTED,
+            round_id,
+            request_id=str(uuid.uuid4()),
+            response_id="",
+            checkpoint_path="",
+            model_version=DEFAULT_MODEL_VERSION,
+            evidence_hash="",
+        )
 
     if task_type not in ("classification", "regression"):
         raise HTTPException(
@@ -448,42 +450,47 @@ async def global_retrieve(
         if status in ("failed_or_timeout", "straggler_dropped") or not update_id:
             event_type = LEDGER_EVENT_CLIENT_TIMEOUT if status == "failed_or_timeout" else "straggler_dropped"
             timeout_ledger_id = f"{query_id}::{client_id}::{event_type}"
-            await _record_ledger_event(
-                query_id,
-                client_id,
-                timeout_ledger_id,
-                event_type,
-                round_id,
-                **ledger_fields,
-            )
+            if not skip_ledger:
+                await _record_ledger_event(
+                    query_id,
+                    client_id,
+                    timeout_ledger_id,
+                    event_type,
+                    round_id,
+                    **ledger_fields,
+                )
             continue
 
-        await _record_ledger_event(
-            query_id,
-            client_id,
-            f"{query_id}::{client_id}::{LEDGER_EVENT_CLIENT_RESPONDED}",
-            LEDGER_EVENT_CLIENT_RESPONDED,
-            round_id,
-            **ledger_fields,
-        )
-
-        is_duplicate = await asyncio.to_thread(
-            check_if_duplicate, update_id, LEDGER_DB_PATH
-        )
-
-        if is_duplicate:
+        if not skip_ledger:
             await _record_ledger_event(
                 query_id,
                 client_id,
-                update_id,
-                LEDGER_EVENT_DUPLICATE_IGNORED,
+                f"{query_id}::{client_id}::{LEDGER_EVENT_CLIENT_RESPONDED}",
+                LEDGER_EVENT_CLIENT_RESPONDED,
                 round_id,
                 **ledger_fields,
             )
+
+        is_duplicate = False
+        if not skip_ledger:
+            is_duplicate = await asyncio.to_thread(
+                check_if_duplicate, update_id, LEDGER_DB_PATH
+            )
+
+        if is_duplicate:
+            if not skip_ledger:
+                await _record_ledger_event(
+                    query_id,
+                    client_id,
+                    update_id,
+                    LEDGER_EVENT_DUPLICATE_IGNORED,
+                    round_id,
+                    **ledger_fields,
+                )
             continue
 
         model_weights = response.get("model_weights")
-        if model_weights:
+        if model_weights and not skip_ledger:
             await _record_ledger_event(
                 query_id,
                 client_id,
@@ -493,14 +500,15 @@ async def global_retrieve(
                 **ledger_fields,
             )
 
-        await _record_ledger_event(
-            query_id,
-            client_id,
-            update_id,
-            LEDGER_EVENT_UPDATE_COMMITTED,
-            round_id,
-            **ledger_fields,
-        )
+        if not skip_ledger:
+            await _record_ledger_event(
+                query_id,
+                client_id,
+                update_id,
+                LEDGER_EVENT_UPDATE_COMMITTED,
+                round_id,
+                **ledger_fields,
+            )
 
         if response.get("status") in ("success", "not_found"):
             client_confidences.append(float(response.get("local_confidence", 0.0)))
