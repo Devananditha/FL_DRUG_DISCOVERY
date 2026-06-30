@@ -1,4 +1,4 @@
-# Failure-Aware Federated Graph-RAG for Drug-Target Retrieval with Exactly-Once Ledger Recovery
+# Failure-Aware Federated Graph Retrieval for Drug-Target Interaction with Exactly-Once Ledger Recovery
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-REST-green.svg)](https://fastapi.tiangolo.com/)
