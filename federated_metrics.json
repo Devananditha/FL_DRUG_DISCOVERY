@@ -1,0 +1,1548 @@
+{
+  "query": "CID000000271",
+  "task_type": "classification",
+  "fast": false,
+  "query_id": "1fa82259-4751-49ea-812c-7e6196f86de2",
+  "round_id": 3,
+  "completeness_score": "3/3",
+  "retrieval_confidence_score": "75%",
+  "available_clients": [
+    "Client_1",
+    "Client_2",
+    "Client_3"
+  ],
+  "missing_clients": [],
+  "straggler_count": 0,
+  "evidence_paths_count": 150,
+  "evidence_paths": [
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 283629",
+      "ml_score": 0.891
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 27035",
+      "ml_score": 0.889
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 109",
+      "ml_score": 0.886
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 51351",
+      "ml_score": 0.88
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 8871",
+      "ml_score": 0.865
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 3004",
+      "ml_score": 0.864
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 147015",
+      "ml_score": 0.864
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 7753",
+      "ml_score": 0.862
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 79175",
+      "ml_score": 0.858
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 28951",
+      "ml_score": 0.858
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 5169",
+      "ml_score": 0.858
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 27343",
+      "ml_score": 0.858
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 8609",
+      "ml_score": 0.857
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 27304",
+      "ml_score": 0.857
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 201516",
+      "ml_score": 0.856
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 83887",
+      "ml_score": 0.856
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 64763",
+      "ml_score": 0.856
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 11199",
+      "ml_score": 0.856
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 10544",
+      "ml_score": 0.855
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 90019",
+      "ml_score": 0.855
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 276",
+      "ml_score": 0.854
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 5868",
+      "ml_score": 0.854
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 316",
+      "ml_score": 0.854
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 25809",
+      "ml_score": 0.853
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 51193",
+      "ml_score": 0.853
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 79727",
+      "ml_score": 0.853
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 196883",
+      "ml_score": 0.851
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 744",
+      "ml_score": 0.85
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 147463",
+      "ml_score": 0.85
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 139741",
+      "ml_score": 0.849
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 2286",
+      "ml_score": 0.849
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 100131980",
+      "ml_score": 0.849
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 208",
+      "ml_score": 0.848
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 114805",
+      "ml_score": 0.848
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 9923",
+      "ml_score": 0.847
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 203100",
+      "ml_score": 0.847
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 1582",
+      "ml_score": 0.846
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 27429",
+      "ml_score": 0.846
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 151649",
+      "ml_score": 0.845
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 374291",
+      "ml_score": 0.845
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 100",
+      "ml_score": 0.845
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 7988",
+      "ml_score": 0.845
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 126231",
+      "ml_score": 0.844
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 4143",
+      "ml_score": 0.844
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 1047",
+      "ml_score": 0.843
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 57336",
+      "ml_score": 0.842
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 255738",
+      "ml_score": 0.842
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 10059",
+      "ml_score": 0.842
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 140625",
+      "ml_score": 0.841
+    },
+    {
+      "client_id": "Client_1",
+      "path": "CID000000271 -> 6877",
+      "ml_score": 0.841
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 4338",
+      "ml_score": 0.908
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 170591",
+      "ml_score": 0.901
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 57010",
+      "ml_score": 0.9
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 257629",
+      "ml_score": 0.9
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 7767",
+      "ml_score": 0.894
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 23770",
+      "ml_score": 0.894
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 9668",
+      "ml_score": 0.891
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 116115",
+      "ml_score": 0.891
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 2119",
+      "ml_score": 0.889
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 871",
+      "ml_score": 0.889
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 148103",
+      "ml_score": 0.888
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 6548",
+      "ml_score": 0.888
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 5276",
+      "ml_score": 0.887
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 23250",
+      "ml_score": 0.887
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 10858",
+      "ml_score": 0.886
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 22921",
+      "ml_score": 0.886
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 8050",
+      "ml_score": 0.885
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 868",
+      "ml_score": 0.884
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 81856",
+      "ml_score": 0.884
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 5592",
+      "ml_score": 0.884
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 6453",
+      "ml_score": 0.884
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 93517",
+      "ml_score": 0.884
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 51643",
+      "ml_score": 0.883
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 285267",
+      "ml_score": 0.883
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 814",
+      "ml_score": 0.883
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 27012",
+      "ml_score": 0.882
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 200205",
+      "ml_score": 0.882
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 5551",
+      "ml_score": 0.882
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 54753",
+      "ml_score": 0.882
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 3684",
+      "ml_score": 0.882
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 79789",
+      "ml_score": 0.881
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 7552",
+      "ml_score": 0.881
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 727",
+      "ml_score": 0.881
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 7581",
+      "ml_score": 0.88
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 79973",
+      "ml_score": 0.88
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 1537",
+      "ml_score": 0.88
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 51809",
+      "ml_score": 0.88
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 79876",
+      "ml_score": 0.879
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 2054",
+      "ml_score": 0.879
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 11345",
+      "ml_score": 0.879
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 7562",
+      "ml_score": 0.879
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 11144",
+      "ml_score": 0.879
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 1345",
+      "ml_score": 0.878
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 1536",
+      "ml_score": 0.878
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 81544",
+      "ml_score": 0.878
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 25925",
+      "ml_score": 0.877
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 121274",
+      "ml_score": 0.877
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 63917",
+      "ml_score": 0.877
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 9379",
+      "ml_score": 0.877
+    },
+    {
+      "client_id": "Client_2",
+      "path": "CID000000271 -> 147948",
+      "ml_score": 0.877
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 124989",
+      "ml_score": 0.885
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 51665",
+      "ml_score": 0.875
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 163255",
+      "ml_score": 0.873
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 50801",
+      "ml_score": 0.862
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 163049",
+      "ml_score": 0.857
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 3991",
+      "ml_score": 0.856
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 7694",
+      "ml_score": 0.855
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 84871",
+      "ml_score": 0.855
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 4719",
+      "ml_score": 0.855
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 11221",
+      "ml_score": 0.854
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 29785",
+      "ml_score": 0.854
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 4722",
+      "ml_score": 0.852
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 1056",
+      "ml_score": 0.849
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 7490",
+      "ml_score": 0.849
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 92283",
+      "ml_score": 0.848
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 6014",
+      "ml_score": 0.848
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 285148",
+      "ml_score": 0.847
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 10266",
+      "ml_score": 0.845
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 312",
+      "ml_score": 0.845
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 2348",
+      "ml_score": 0.844
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 140459",
+      "ml_score": 0.844
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 1337",
+      "ml_score": 0.844
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 5423",
+      "ml_score": 0.841
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 163223",
+      "ml_score": 0.84
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 5271",
+      "ml_score": 0.839
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 7675",
+      "ml_score": 0.839
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 1302",
+      "ml_score": 0.839
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 80264",
+      "ml_score": 0.839
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 55170",
+      "ml_score": 0.838
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 57567",
+      "ml_score": 0.838
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 7113",
+      "ml_score": 0.838
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 55279",
+      "ml_score": 0.838
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 10628",
+      "ml_score": 0.838
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 55713",
+      "ml_score": 0.838
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 1773",
+      "ml_score": 0.838
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 57761",
+      "ml_score": 0.837
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 1259",
+      "ml_score": 0.837
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 381",
+      "ml_score": 0.837
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 11158",
+      "ml_score": 0.836
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 162972",
+      "ml_score": 0.836
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 4646",
+      "ml_score": 0.835
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 3003",
+      "ml_score": 0.835
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 93107",
+      "ml_score": 0.835
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 79692",
+      "ml_score": 0.835
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 125061",
+      "ml_score": 0.835
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 340075",
+      "ml_score": 0.834
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 84698",
+      "ml_score": 0.833
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 11181",
+      "ml_score": 0.833
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 7388",
+      "ml_score": 0.833
+    },
+    {
+      "client_id": "Client_3",
+      "path": "CID000000271 -> 166793",
+      "ml_score": 0.832
+    }
+  ],
+  "client_link_prediction_metrics": {
+    "Client_1": {
+      "precision": 0.597,
+      "recall": 0.578,
+      "f1_score": 0.587,
+      "top_5_precision": 0.8,
+      "top_10_precision": 0.9,
+      "top_20_precision": 0.8,
+      "top_50_precision": 0.68,
+      "mrr": 0.5,
+      "training_time_ms": 83.08
+    },
+    "Client_2": {
+      "precision": 0.64,
+      "recall": 0.75,
+      "f1_score": 0.691,
+      "top_5_precision": 1.0,
+      "top_10_precision": 1.0,
+      "top_20_precision": 0.7,
+      "top_50_precision": 0.62,
+      "mrr": 1.0,
+      "training_time_ms": 82.58
+    },
+    "Client_3": {
+      "precision": 0.603,
+      "recall": 0.734,
+      "f1_score": 0.662,
+      "top_5_precision": 1.0,
+      "top_10_precision": 0.9,
+      "top_20_precision": 0.8,
+      "top_50_precision": 0.6,
+      "mrr": 1.0,
+      "training_time_ms": 91.66
+    }
+  },
+  "federated_link_prediction_metrics": {
+    "precision": 0.613,
+    "recall": 0.687,
+    "f1_score": 0.647,
+    "top_5_precision": 0.933,
+    "top_10_precision": 0.933,
+    "top_20_precision": 0.767,
+    "top_50_precision": 0.633,
+    "mrr": 0.833
+  },
+  "global_aggregated_model": {
+    "embeddings.weight": {
+      "shape": [
+        100000,
+        64
+      ]
+    },
+    "mlp.0.weight": {
+      "shape": [
+        64,
+        128
+      ]
+    },
+    "mlp.0.bias": {
+      "shape": [
+        64
+      ]
+    },
+    "mlp.2.weight": {
+      "shape": [
+        1,
+        64
+      ]
+    },
+    "mlp.2.bias": {
+      "shape": [
+        1
+      ]
+    }
+  },
+  "gas_optimization_metrics": {
+    "simulated_unbatched_gas": 15000,
+    "actual_batched_gas": 120,
+    "gas_saved_percentage": 99.2,
+    "verified_batch_hashes": [
+      "b1758095f40dd7bf8c39e4032bc0b5487460ede0c4a7c04c186f179e297395de",
+      "a8ba4241dd3265f73d7a9489c731e15ac199196bfbcbaee3a5514368f8cf5630",
+      "da6b3f18ef0c7141650aaba7b1e0a6eb274b360fdaab2c4073271c08d9992ecd"
+    ]
+  },
+  "performance_metrics": {
+    "total_latency_ms": 23380.86,
+    "fedavg_time_ms": 2013.77,
+    "network_bytes": 397246458,
+    "system_state": "no_failure",
+    "ledger_size_kb": 28.0,
+    "duplicate_interception_rate": "100%"
+  },
+  "raw_responses": [
+    {
+      "client_id": "Client_1",
+      "drug_id": "CID000000271",
+      "task_type": "classification",
+      "targets": [
+        {
+          "path": "CID000000271 -> 283629",
+          "ml_score": 0.891
+        },
+        {
+          "path": "CID000000271 -> 27035",
+          "ml_score": 0.889
+        },
+        {
+          "path": "CID000000271 -> 109",
+          "ml_score": 0.886
+        },
+        {
+          "path": "CID000000271 -> 51351",
+          "ml_score": 0.88
+        },
+        {
+          "path": "CID000000271 -> 8871",
+          "ml_score": 0.865
+        },
+        {
+          "path": "CID000000271 -> 3004",
+          "ml_score": 0.864
+        },
+        {
+          "path": "CID000000271 -> 147015",
+          "ml_score": 0.864
+        },
+        {
+          "path": "CID000000271 -> 7753",
+          "ml_score": 0.862
+        },
+        {
+          "path": "CID000000271 -> 79175",
+          "ml_score": 0.858
+        },
+        {
+          "path": "CID000000271 -> 28951",
+          "ml_score": 0.858
+        },
+        {
+          "path": "CID000000271 -> 5169",
+          "ml_score": 0.858
+        },
+        {
+          "path": "CID000000271 -> 27343",
+          "ml_score": 0.858
+        },
+        {
+          "path": "CID000000271 -> 8609",
+          "ml_score": 0.857
+        },
+        {
+          "path": "CID000000271 -> 27304",
+          "ml_score": 0.857
+        },
+        {
+          "path": "CID000000271 -> 201516",
+          "ml_score": 0.856
+        },
+        {
+          "path": "CID000000271 -> 83887",
+          "ml_score": 0.856
+        },
+        {
+          "path": "CID000000271 -> 64763",
+          "ml_score": 0.856
+        },
+        {
+          "path": "CID000000271 -> 11199",
+          "ml_score": 0.856
+        },
+        {
+          "path": "CID000000271 -> 10544",
+          "ml_score": 0.855
+        },
+        {
+          "path": "CID000000271 -> 90019",
+          "ml_score": 0.855
+        },
+        {
+          "path": "CID000000271 -> 276",
+          "ml_score": 0.854
+        },
+        {
+          "path": "CID000000271 -> 5868",
+          "ml_score": 0.854
+        },
+        {
+          "path": "CID000000271 -> 316",
+          "ml_score": 0.854
+        },
+        {
+          "path": "CID000000271 -> 25809",
+          "ml_score": 0.853
+        },
+        {
+          "path": "CID000000271 -> 51193",
+          "ml_score": 0.853
+        },
+        {
+          "path": "CID000000271 -> 79727",
+          "ml_score": 0.853
+        },
+        {
+          "path": "CID000000271 -> 196883",
+          "ml_score": 0.851
+        },
+        {
+          "path": "CID000000271 -> 744",
+          "ml_score": 0.85
+        },
+        {
+          "path": "CID000000271 -> 147463",
+          "ml_score": 0.85
+        },
+        {
+          "path": "CID000000271 -> 139741",
+          "ml_score": 0.849
+        },
+        {
+          "path": "CID000000271 -> 2286",
+          "ml_score": 0.849
+        },
+        {
+          "path": "CID000000271 -> 100131980",
+          "ml_score": 0.849
+        },
+        {
+          "path": "CID000000271 -> 208",
+          "ml_score": 0.848
+        },
+        {
+          "path": "CID000000271 -> 114805",
+          "ml_score": 0.848
+        },
+        {
+          "path": "CID000000271 -> 9923",
+          "ml_score": 0.847
+        },
+        {
+          "path": "CID000000271 -> 203100",
+          "ml_score": 0.847
+        },
+        {
+          "path": "CID000000271 -> 1582",
+          "ml_score": 0.846
+        },
+        {
+          "path": "CID000000271 -> 27429",
+          "ml_score": 0.846
+        },
+        {
+          "path": "CID000000271 -> 151649",
+          "ml_score": 0.845
+        },
+        {
+          "path": "CID000000271 -> 374291",
+          "ml_score": 0.845
+        },
+        {
+          "path": "CID000000271 -> 100",
+          "ml_score": 0.845
+        },
+        {
+          "path": "CID000000271 -> 7988",
+          "ml_score": 0.845
+        },
+        {
+          "path": "CID000000271 -> 126231",
+          "ml_score": 0.844
+        },
+        {
+          "path": "CID000000271 -> 4143",
+          "ml_score": 0.844
+        },
+        {
+          "path": "CID000000271 -> 1047",
+          "ml_score": 0.843
+        },
+        {
+          "path": "CID000000271 -> 57336",
+          "ml_score": 0.842
+        },
+        {
+          "path": "CID000000271 -> 255738",
+          "ml_score": 0.842
+        },
+        {
+          "path": "CID000000271 -> 10059",
+          "ml_score": 0.842
+        },
+        {
+          "path": "CID000000271 -> 140625",
+          "ml_score": 0.841
+        },
+        {
+          "path": "CID000000271 -> 6877",
+          "ml_score": 0.841
+        }
+      ],
+      "status": "success",
+      "batch_hash": "b1758095f40dd7bf8c39e4032bc0b5487460ede0c4a7c04c186f179e297395de",
+      "local_confidence": 0.75,
+      "local_edge_count": 6230,
+      "metrics": {
+        "precision": 0.597,
+        "recall": 0.578,
+        "f1_score": 0.587,
+        "top_5_precision": 0.8,
+        "top_10_precision": 0.9,
+        "top_20_precision": 0.8,
+        "top_50_precision": 0.68,
+        "mrr": 0.5,
+        "training_time_ms": 83.08
+      },
+      "response_id": "a085d470-1ebb-477c-8a5d-d33eb03b3a4b",
+      "checkpoint_path": "checkpoints/client_1.pt",
+      "model_version": "v1.0.0",
+      "update_id": "3580d6e9-14a5-4cab-a02a-978dd2bdbfbb",
+      "request_id": "dc6a2c98-fae2-4fee-afd1-70830e0e971b",
+      "_response_size_bytes": 132415809
+    },
+    {
+      "client_id": "Client_2",
+      "drug_id": "CID000000271",
+      "task_type": "classification",
+      "targets": [
+        {
+          "path": "CID000000271 -> 4338",
+          "ml_score": 0.908
+        },
+        {
+          "path": "CID000000271 -> 170591",
+          "ml_score": 0.901
+        },
+        {
+          "path": "CID000000271 -> 57010",
+          "ml_score": 0.9
+        },
+        {
+          "path": "CID000000271 -> 257629",
+          "ml_score": 0.9
+        },
+        {
+          "path": "CID000000271 -> 7767",
+          "ml_score": 0.894
+        },
+        {
+          "path": "CID000000271 -> 23770",
+          "ml_score": 0.894
+        },
+        {
+          "path": "CID000000271 -> 9668",
+          "ml_score": 0.891
+        },
+        {
+          "path": "CID000000271 -> 116115",
+          "ml_score": 0.891
+        },
+        {
+          "path": "CID000000271 -> 2119",
+          "ml_score": 0.889
+        },
+        {
+          "path": "CID000000271 -> 871",
+          "ml_score": 0.889
+        },
+        {
+          "path": "CID000000271 -> 148103",
+          "ml_score": 0.888
+        },
+        {
+          "path": "CID000000271 -> 6548",
+          "ml_score": 0.888
+        },
+        {
+          "path": "CID000000271 -> 5276",
+          "ml_score": 0.887
+        },
+        {
+          "path": "CID000000271 -> 23250",
+          "ml_score": 0.887
+        },
+        {
+          "path": "CID000000271 -> 10858",
+          "ml_score": 0.886
+        },
+        {
+          "path": "CID000000271 -> 22921",
+          "ml_score": 0.886
+        },
+        {
+          "path": "CID000000271 -> 8050",
+          "ml_score": 0.885
+        },
+        {
+          "path": "CID000000271 -> 868",
+          "ml_score": 0.884
+        },
+        {
+          "path": "CID000000271 -> 81856",
+          "ml_score": 0.884
+        },
+        {
+          "path": "CID000000271 -> 5592",
+          "ml_score": 0.884
+        },
+        {
+          "path": "CID000000271 -> 6453",
+          "ml_score": 0.884
+        },
+        {
+          "path": "CID000000271 -> 93517",
+          "ml_score": 0.884
+        },
+        {
+          "path": "CID000000271 -> 51643",
+          "ml_score": 0.883
+        },
+        {
+          "path": "CID000000271 -> 285267",
+          "ml_score": 0.883
+        },
+        {
+          "path": "CID000000271 -> 814",
+          "ml_score": 0.883
+        },
+        {
+          "path": "CID000000271 -> 27012",
+          "ml_score": 0.882
+        },
+        {
+          "path": "CID000000271 -> 200205",
+          "ml_score": 0.882
+        },
+        {
+          "path": "CID000000271 -> 5551",
+          "ml_score": 0.882
+        },
+        {
+          "path": "CID000000271 -> 54753",
+          "ml_score": 0.882
+        },
+        {
+          "path": "CID000000271 -> 3684",
+          "ml_score": 0.882
+        },
+        {
+          "path": "CID000000271 -> 79789",
+          "ml_score": 0.881
+        },
+        {
+          "path": "CID000000271 -> 7552",
+          "ml_score": 0.881
+        },
+        {
+          "path": "CID000000271 -> 727",
+          "ml_score": 0.881
+        },
+        {
+          "path": "CID000000271 -> 7581",
+          "ml_score": 0.88
+        },
+        {
+          "path": "CID000000271 -> 79973",
+          "ml_score": 0.88
+        },
+        {
+          "path": "CID000000271 -> 1537",
+          "ml_score": 0.88
+        },
+        {
+          "path": "CID000000271 -> 51809",
+          "ml_score": 0.88
+        },
+        {
+          "path": "CID000000271 -> 79876",
+          "ml_score": 0.879
+        },
+        {
+          "path": "CID000000271 -> 2054",
+          "ml_score": 0.879
+        },
+        {
+          "path": "CID000000271 -> 11345",
+          "ml_score": 0.879
+        },
+        {
+          "path": "CID000000271 -> 7562",
+          "ml_score": 0.879
+        },
+        {
+          "path": "CID000000271 -> 11144",
+          "ml_score": 0.879
+        },
+        {
+          "path": "CID000000271 -> 1345",
+          "ml_score": 0.878
+        },
+        {
+          "path": "CID000000271 -> 1536",
+          "ml_score": 0.878
+        },
+        {
+          "path": "CID000000271 -> 81544",
+          "ml_score": 0.878
+        },
+        {
+          "path": "CID000000271 -> 25925",
+          "ml_score": 0.877
+        },
+        {
+          "path": "CID000000271 -> 121274",
+          "ml_score": 0.877
+        },
+        {
+          "path": "CID000000271 -> 63917",
+          "ml_score": 0.877
+        },
+        {
+          "path": "CID000000271 -> 9379",
+          "ml_score": 0.877
+        },
+        {
+          "path": "CID000000271 -> 147948",
+          "ml_score": 0.877
+        }
+      ],
+      "status": "success",
+      "batch_hash": "a8ba4241dd3265f73d7a9489c731e15ac199196bfbcbaee3a5514368f8cf5630",
+      "local_confidence": 0.75,
+      "local_edge_count": 6230,
+      "metrics": {
+        "precision": 0.64,
+        "recall": 0.75,
+        "f1_score": 0.691,
+        "top_5_precision": 1.0,
+        "top_10_precision": 1.0,
+        "top_20_precision": 0.7,
+        "top_50_precision": 0.62,
+        "mrr": 1.0,
+        "training_time_ms": 82.58
+      },
+      "response_id": "099477a7-d473-4068-b83e-5936a9a383cc",
+      "checkpoint_path": "checkpoints/client_2.pt",
+      "model_version": "v1.0.0",
+      "update_id": "832390b6-6104-41d3-88d8-70e9361eda9c",
+      "request_id": "42421bc2-a94c-4420-91b8-e652fa553ce8",
+      "_response_size_bytes": 132415123
+    },
+    {
+      "client_id": "Client_3",
+      "drug_id": "CID000000271",
+      "task_type": "classification",
+      "targets": [
+        {
+          "path": "CID000000271 -> 124989",
+          "ml_score": 0.885
+        },
+        {
+          "path": "CID000000271 -> 51665",
+          "ml_score": 0.875
+        },
+        {
+          "path": "CID000000271 -> 163255",
+          "ml_score": 0.873
+        },
+        {
+          "path": "CID000000271 -> 50801",
+          "ml_score": 0.862
+        },
+        {
+          "path": "CID000000271 -> 163049",
+          "ml_score": 0.857
+        },
+        {
+          "path": "CID000000271 -> 3991",
+          "ml_score": 0.856
+        },
+        {
+          "path": "CID000000271 -> 7694",
+          "ml_score": 0.855
+        },
+        {
+          "path": "CID000000271 -> 84871",
+          "ml_score": 0.855
+        },
+        {
+          "path": "CID000000271 -> 4719",
+          "ml_score": 0.855
+        },
+        {
+          "path": "CID000000271 -> 11221",
+          "ml_score": 0.854
+        },
+        {
+          "path": "CID000000271 -> 29785",
+          "ml_score": 0.854
+        },
+        {
+          "path": "CID000000271 -> 4722",
+          "ml_score": 0.852
+        },
+        {
+          "path": "CID000000271 -> 1056",
+          "ml_score": 0.849
+        },
+        {
+          "path": "CID000000271 -> 7490",
+          "ml_score": 0.849
+        },
+        {
+          "path": "CID000000271 -> 92283",
+          "ml_score": 0.848
+        },
+        {
+          "path": "CID000000271 -> 6014",
+          "ml_score": 0.848
+        },
+        {
+          "path": "CID000000271 -> 285148",
+          "ml_score": 0.847
+        },
+        {
+          "path": "CID000000271 -> 10266",
+          "ml_score": 0.845
+        },
+        {
+          "path": "CID000000271 -> 312",
+          "ml_score": 0.845
+        },
+        {
+          "path": "CID000000271 -> 2348",
+          "ml_score": 0.844
+        },
+        {
+          "path": "CID000000271 -> 140459",
+          "ml_score": 0.844
+        },
+        {
+          "path": "CID000000271 -> 1337",
+          "ml_score": 0.844
+        },
+        {
+          "path": "CID000000271 -> 5423",
+          "ml_score": 0.841
+        },
+        {
+          "path": "CID000000271 -> 163223",
+          "ml_score": 0.84
+        },
+        {
+          "path": "CID000000271 -> 5271",
+          "ml_score": 0.839
+        },
+        {
+          "path": "CID000000271 -> 7675",
+          "ml_score": 0.839
+        },
+        {
+          "path": "CID000000271 -> 1302",
+          "ml_score": 0.839
+        },
+        {
+          "path": "CID000000271 -> 80264",
+          "ml_score": 0.839
+        },
+        {
+          "path": "CID000000271 -> 55170",
+          "ml_score": 0.838
+        },
+        {
+          "path": "CID000000271 -> 57567",
+          "ml_score": 0.838
+        },
+        {
+          "path": "CID000000271 -> 7113",
+          "ml_score": 0.838
+        },
+        {
+          "path": "CID000000271 -> 55279",
+          "ml_score": 0.838
+        },
+        {
+          "path": "CID000000271 -> 10628",
+          "ml_score": 0.838
+        },
+        {
+          "path": "CID000000271 -> 55713",
+          "ml_score": 0.838
+        },
+        {
+          "path": "CID000000271 -> 1773",
+          "ml_score": 0.838
+        },
+        {
+          "path": "CID000000271 -> 57761",
+          "ml_score": 0.837
+        },
+        {
+          "path": "CID000000271 -> 1259",
+          "ml_score": 0.837
+        },
+        {
+          "path": "CID000000271 -> 381",
+          "ml_score": 0.837
+        },
+        {
+          "path": "CID000000271 -> 11158",
+          "ml_score": 0.836
+        },
+        {
+          "path": "CID000000271 -> 162972",
+          "ml_score": 0.836
+        },
+        {
+          "path": "CID000000271 -> 4646",
+          "ml_score": 0.835
+        },
+        {
+          "path": "CID000000271 -> 3003",
+          "ml_score": 0.835
+        },
+        {
+          "path": "CID000000271 -> 93107",
+          "ml_score": 0.835
+        },
+        {
+          "path": "CID000000271 -> 79692",
+          "ml_score": 0.835
+        },
+        {
+          "path": "CID000000271 -> 125061",
+          "ml_score": 0.835
+        },
+        {
+          "path": "CID000000271 -> 340075",
+          "ml_score": 0.834
+        },
+        {
+          "path": "CID000000271 -> 84698",
+          "ml_score": 0.833
+        },
+        {
+          "path": "CID000000271 -> 11181",
+          "ml_score": 0.833
+        },
+        {
+          "path": "CID000000271 -> 7388",
+          "ml_score": 0.833
+        },
+        {
+          "path": "CID000000271 -> 166793",
+          "ml_score": 0.832
+        }
+      ],
+      "status": "success",
+      "batch_hash": "da6b3f18ef0c7141650aaba7b1e0a6eb274b360fdaab2c4073271c08d9992ecd",
+      "local_confidence": 0.75,
+      "local_edge_count": 6230,
+      "metrics": {
+        "precision": 0.603,
+        "recall": 0.734,
+        "f1_score": 0.662,
+        "top_5_precision": 1.0,
+        "top_10_precision": 0.9,
+        "top_20_precision": 0.8,
+        "top_50_precision": 0.6,
+        "mrr": 1.0,
+        "training_time_ms": 91.66
+      },
+      "response_id": "92a5fc6d-8c64-4527-b843-334f27bd29f8",
+      "checkpoint_path": "checkpoints/client_3.pt",
+      "model_version": "v1.0.0",
+      "update_id": "6093094a-721b-4b41-b7bf-c08f1a212bff",
+      "request_id": "4143c5da-fd10-4536-9a79-5ba3a6bf8533",
+      "_response_size_bytes": 132415526
+    }
+  ]
+}

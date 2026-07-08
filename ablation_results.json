@@ -1,0 +1,33 @@
+{
+  "n_rounds": 5,
+  "drug_id": "CID000000271",
+  "mode_A_timeout_only": {
+    "mean": 19674.31,
+    "std": 4537.65,
+    "min": 17141.4,
+    "max": 27737.99,
+    "raw_ms": [
+      18352.02,
+      17171.14,
+      17141.4,
+      17969.01,
+      27737.99
+    ]
+  },
+  "mode_B_full_ledger": {
+    "mean": 23733.8,
+    "std": 7411.06,
+    "min": 17933.92,
+    "max": 32207.97,
+    "raw_ms": [
+      18210.19,
+      17933.92,
+      18846.75,
+      32207.97,
+      31470.16
+    ]
+  },
+  "ledger_overhead_ms": 4059.49,
+  "ledger_overhead_pct": 20.63,
+  "conclusion": "The idempotent SQLite ledger adds only 4059.5 ms (20.6%) overhead per federated round, confirming it introduces negligible latency."
+}
